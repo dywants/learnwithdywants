@@ -1,0 +1,9 @@
+@layout('layouts/app')
+
+@section('content')
+    <h1>je suis la home
+     @if(auth.user)
+        {{ auth.user.username }}
+      @endif
+    </h1>
+@endsection

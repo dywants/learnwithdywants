@@ -1,0 +1,33 @@
+@layout('layouts/app')
+
+@section('content')
+
+@if(flashMessages.has('auth.errors'))
+<p>Aucun utilisateur n'a été trouvé avec ces identifiants</p>
+@endif
+
+<form 
+      action="{{route('AuthController.login')}}" 
+      method="POST" 
+      up-submit 
+      up-target="[page-body]">
+      
+    {{ csrfField() }}
+
+    @form.group({ name: 'email' })
+      @!form.label({ title: 'Email' })
+      @!form.input({ type: 'email' })
+    @end
+
+    @form.group({ name: 'password' })
+      @!form.label({ title: 'Mot de passe' })
+      @!form.input({ type: 'password' })
+    @end
+
+    @elements.button({ type: 'submit' })
+      Connexion
+    @end
+
+   <a href="{{ route('SocialAuthsController.redirect', { provider: 'github' }) }}">Connexion via GitHub</a>
+</form>
+@endsection

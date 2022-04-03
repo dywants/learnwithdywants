@@ -1,0 +1,17 @@
+<nav>
+    <a href="/" up-target="[main-layout]">Home</a>
+    @if(auth.user)
+    <form action="{{ route('AuthController.logout')}}?_method=DELETE" method="POST" 
+        up-submit 
+        up-target="[page-body]">
+        
+        {{ csrfField() }}
+    @elements.button({ type: 'submit' })
+        deconnexion
+    @end
+    </form>
+    @else
+    <a href="{{route('AuthController.showLoginForm')}}" up-target="[main-layout]">Se connecter</a>
+    <a href="{{route('AuthController.showRegisterForm')}}" up-target="[main-layout]">S'inscrire</a>
+    @endif
+</nav>
